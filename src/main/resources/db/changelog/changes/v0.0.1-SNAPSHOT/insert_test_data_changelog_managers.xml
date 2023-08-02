@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="insert test data into managers table" author="SmA">
+        <insert tableName="managers">
+            <column name="id" value="1"/>
+            <column name="first_name" value="Petr"/>
+            <column name="last_name" value="Sorokin"/>
+            <column name="status" value="1"/>
+            <column name="created_at" value="2016-05-18"/>
+            <column name="updated_at" value="2023-06-03"/>
+        </insert>
+        <insert tableName="managers">
+            <column name="id" value="2"/>
+            <column name="first_name" value="Nikolay"/>
+            <column name="last_name" value="Ivanov"/>
+            <column name="status" value="1"/>
+            <column name="created_at" value="2018-06-03"/>
+            <column name="updated_at" value="2023-09-03"/>
+        </insert>
+        <insert tableName="managers">
+            <column name="id" value="3"/>
+            <column name="first_name" value="Ivan"/>
+            <column name="last_name" value="Sidorov"/>
+            <column name="status" value="1"/>
+            <column name="created_at" value="2015-06-03"/>
+            <column name="updated_at" value="2023-06-03"/>
+        </insert>
+    </changeSet>
+
+
+</databaseChangeLog>
