@@ -6,6 +6,14 @@
 </head>
 <body>
 
+Add new manager
+<form action="/add" method="post">
+    <div><label> User Name : <input type="text" name="firstname"/> </label></div>
+    <div><label> Password: <input type="text" name="lastname"/> </label></div>
+
+    <div><input type="submit" value="Sign In"/></div>
+</form>
+
 {{#m}}
     <div>
         <b>{{id}}</b>

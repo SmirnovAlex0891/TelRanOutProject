@@ -16,4 +16,5 @@ public interface ManagerRepository extends JpaRepository<Manager, Long> {
     Optional<Manager> findManagerByLastName(@Param("lastname") String lastName);
 
     Optional<Manager> findManagerById(Long id);
+
 }

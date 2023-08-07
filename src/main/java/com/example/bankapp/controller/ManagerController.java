@@ -49,7 +49,6 @@ public class ManagerController {
 
     @PostMapping("/add")
     public String addUser(Manager manager, Map<String, Object> model) {
-        System.out.println(manager.getFirstName() + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         manager.setStatus(1);
         managerRepository.save(manager);
 

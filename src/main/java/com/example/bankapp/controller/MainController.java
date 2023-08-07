@@ -43,4 +43,14 @@ public class MainController {
 
         return "redirect:/login";
     }
+    @GetMapping("/main")
+    public String main(Map<String, Object> model) {
+
+        return "main";
+    }
+
+    @GetMapping(path = "/manager")
+    public String manager() {
+        return "managers";
+    }
 }
