@@ -8,76 +8,188 @@
 
     <changeSet id="insert test data into managers table" author="SmA">
         <insert tableName="managers">
-            <column name="id" valueComputed="UUID_TO_BIN('933eaea5-c308-4492-872c-d32d110987b0')"/>
-            <column name="first_name" value="Steev"/>
-            <column name="last_name" value="Jobs"/>
-            <column name="status" value="1"/>
-            <column name="created_at" value="2018-02-01"/>
-            <column name="updated_at" value="2023-08-01"/>
+            <column name="id" value="1001"/>
+            <column name="first_name" value="Petr"/>
+            <column name="last_name" value="Sorokin"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="created_at" value="2016-05-18"/>
+            <column name="updated_at" value="2023-06-03"/>
+        </insert>
+        <insert tableName="managers">
+            <column name="id" value="1002"/>
+            <column name="first_name" value="Nikolay"/>
+            <column name="last_name" value="Ivanov"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="created_at" value="2018-06-03"/>
+            <column name="updated_at" value="2023-09-03"/>
+        </insert>
+        <insert tableName="managers">
+            <column name="id" value="1003"/>
+            <column name="first_name" value="Ivan"/>
+            <column name="last_name" value="Sidorov"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="created_at" value="2015-06-03"/>
+            <column name="updated_at" value="2023-06-03"/>
         </insert>
     </changeSet>
 
     <changeSet id="insert test data into clients table" author="SmA">
         <insert tableName="clients">
-            <column name="id" value="0000000000001100"/>
-            <column name="status" value="1"/>
-            <column name="tax_code" value="1010-10"/>
-            <column name="first_name" value="Adam"/>
-            <column name="last_name" value="Smith"/>
-            <column name="email" value="smith_0133@gmail.com"/>
-            <column name="address" value="Boston, Uniq st. 54/22"/>
-            <column name="phone" value="+1 (222) 345-6789"/>
+            <column name="id" value="2001"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="tax_code" value="XXX"/>
+            <column name="first_name" value="Nikolay"/>
+            <column name="last_name" value="Cherkasov"/>
+            <column name="email" value="cherkasov@gmail.com"/>
+            <column name="address" value="Minsk, pr. Nezavisimosty 54/22"/>
+            <column name="phone" value="+375 (29) 222-33-44"/>
             <column name="updated_at" value="2023-07-05"/>
-            <column name="manager_id" valueComputed="UUID_TO_BIN('933eaea5-c308-4492-872c-d32d110987b0')"/>
+            <column name="manager_id" value="1001"/>
+        </insert>
+        <insert tableName="clients">
+            <column name="id" value="2002"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="tax_code" value="XXX"/>
+            <column name="first_name" value="Igor"/>
+            <column name="last_name" value="Usmanov"/>
+            <column name="email" value="usmanov@gmail.com"/>
+            <column name="address" value="Grodno, st. Kalinovskogo 35/122"/>
+            <column name="phone" value="+375 (44) 555-44-77"/>
+            <column name="updated_at" value="2023-07-05"/>
+            <column name="manager_id" value="1001"/>
+        </insert>
+        <insert tableName="clients">
+            <column name="id" value="2003"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="tax_code" value="XXX"/>
+            <column name="first_name" value="Andrey"/>
+            <column name="last_name" value="Pchelkin"/>
+            <column name="email" value="rojkov@gmail.com"/>
+            <column name="address" value="Brest, st. Masherova 27/99"/>
+            <column name="phone" value="+375 (33) 777-44-22"/>
+            <column name="updated_at" value="2023-07-05"/>
+            <column name="manager_id" value="1003"/>
         </insert>
     </changeSet>
 
     <changeSet id="insert test data into accounts table" author="SmA">
         <insert tableName="accounts">
-            <column name="id" value="0000000000110000"/>
-            <column name="name" value="bank_account_Smith"/>
-            <column name="type" value="0"/>
-            <column name="status" value="0"/>
-            <column name="balance" value="10000"/>
-            <column name="currency_code" value="1"/>
-            <column name="updated_at" value="2023-07-05"/>
-            <column name="client_id" value="0000000000001100"/>
+            <column name="id" value="3001"/>
+            <column name="name" value="PL10 1050 0099 7603 1234 5678 9123"/>
+            <column name="type" value="x???"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="balance" value="1000"/>
+            <column name="currency_code" value="usd"/>
+            <column name="updated_at" value="2023-06-04"/>
+            <column name="client_id" value="2001"/>
+        </insert>
+        <insert tableName="accounts">
+            <column name="id" value="3002"/>
+            <column name="name" value="BY86 AKBB 1010 0000 0029 6600 0000"/>
+            <column name="type" value="x???"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="balance" value="2000"/>
+            <column name="currency_code" value="usd"/>
+            <column name="updated_at" value="2023-05-04"/>
+            <column name="client_id" value="2002"/>
+        </insert>
+        <insert tableName="accounts">
+            <column name="id" value="3003"/>
+            <column name="name" value="LT60 1010 0123 4567 8901"/>
+            <column name="type" value="x???"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="balance" value="500"/>
+            <column name="currency_code" value="usd"/>
+            <column name="updated_at" value="2023-02-10"/>
+            <column name="client_id" value="2003"/>
         </insert>
     </changeSet>
 
     <changeSet id="insert test data into transactions table" author="SmA">
         <insert tableName="transactions">
-            <column name="id" value="0000000011000000"/>
-            <column name="type" value="0"/>
+            <column name="id" value="4001"/>
+            <column name="type" value="sending"/>
+            <column name="amount" value="150.75"/>
+            <column name="description" value="150 usd from N.Cherkasov to A.Pchelkin"/>
+            <column name="debit_account_id" value="3003"/>
+            <column name="credit_account_id" value="3001"/>
+        </insert>
+        <insert tableName="transactions">
+            <column name="id" value="4002"/>
+            <column name="type" value="receiving"/>
             <column name="amount" value="150"/>
-            <column name="description" value="150 usd from Adam Smith to ..."/>
-            <column name="debit_account_id" value="0000000000110000"/>
-            <column name="credit_account_id" value="0000000000110000"/>
+            <column name="description" value="150 usd from N.Cherkasov to A.Pchelkin"/>
+            <column name="debit_account_id" value="3003"/>
+            <column name="credit_account_id" value="3001"/>
+        </insert>
+        <insert tableName="transactions">
+            <column name="id" value="4003"/>
+            <column name="type" value="sending"/>
+            <column name="amount" value="250"/>
+            <column name="description" value="250 usd from I.Usmanov to N.Cherkasov"/>
+            <column name="debit_account_id" value="3001"/>
+            <column name="credit_account_id" value="3002"/>
+        </insert>
+        <insert tableName="transactions">
+            <column name="id" value="4004"/>
+            <column name="type" value="receiving"/>
+            <column name="amount" value="250"/>
+            <column name="description" value="250 usd from I.Usmanov to N.Cherkasov"/>
+            <column name="debit_account_id" value="3001"/>
+            <column name="credit_account_id" value="3002"/>
         </insert>
     </changeSet>
 
     <changeSet id="insert test data into products table" author="SmA">
         <insert tableName="products">
-            <column name="id" value="0000001100000000"/>
-            <column name="name" value="deposit account"/>
-            <column name="status" value="0"/>
-            <column name="currency_code" value="01"/>
-            <column name="interest_rate" value="00.0015"/>
-            <column name="limit" value="100000"/>
+            <column name="id" value="5001"/>
+            <column name="name" value="departure service"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="currency_code" value="x???"/>
+            <column name="interest_rate" value="0.5"/>
+            <column name="limit" value="10000"/>
             <column name="updated_at" value="2023-07-05"/>
-            <column name="manager_id" valueComputed="UUID_TO_BIN('933eaea5-c308-4492-872c-d32d110987b0')"/>
+            <column name="manager_id" valueComputed="1003"/>
+        </insert>
+        <insert tableName="products">
+            <column name="id" value="5002"/>
+            <column name="name" value="receiving service"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="currency_code" value="x???"/>
+            <column name="interest_rate" value="0.00"/>
+            <column name="limit" value="10000"/>
+            <column name="updated_at" value="2023-07-05"/>
+            <column name="manager_id" valueComputed="1002"/>
         </insert>
     </changeSet>
 
     <changeSet id="insert test data into agreements table" author="SmA">
         <insert tableName="agreements">
-            <column name="id" value="0000110000000000"/>
-            <column name="interest_rate" value="00.0015"/>
-            <column name="status" value="0"/>
+            <column name="id" value="6001"/>
+            <column name="interest_rate" value="0.5"/>
+            <column name="status" value="ACTIVE"/>
             <column name="sum" value="1000"/>
             <column name="updated_at" value="2023-07-05"/>
-            <column name="account_id" value="0000000000110000"/>
-            <column name="product_id" value="0000001100000000"/>
+            <column name="account_id" value="3001"/>
+            <column name="product_id" value="5001"/>
+        </insert>
+        <insert tableName="agreements">
+            <column name="id" value="6002"/>
+            <column name="interest_rate" value="0.5"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="sum" value="2000"/>
+            <column name="updated_at" value="2023-07-05"/>
+            <column name="account_id" value="3002"/>
+            <column name="product_id" value="5001"/>
+        </insert>
+        <insert tableName="agreements">
+            <column name="id" value="6003"/>
+            <column name="interest_rate" value="0.5"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="sum" value="500"/>
+            <column name="updated_at" value="2023-07-05"/>
+            <column name="account_id" value="3003"/>
+            <column name="product_id" value="5001"/>
         </insert>
     </changeSet>
 

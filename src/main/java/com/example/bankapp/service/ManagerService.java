@@ -1,9 +1,14 @@
 package com.example.bankapp.service;
 
-import com.example.bankapp.dto.ManagerDTO;
+import com.example.bankapp.dto.ManagerDto;
+
+import java.util.List;
 
 public interface ManagerService {
-    ManagerDTO getManagerByName(String name);
+    List<ManagerDto> getAllManagers();
 
-    ManagerDTO getManagerById(Long id);
+    ManagerDto getManagerByName(String name);
+
+    void addManager(String lastname, String firstname);
+    void deleteManager(String lastname, String firstname);
 }

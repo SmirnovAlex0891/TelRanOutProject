@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -17,15 +18,22 @@ import java.util.UUID;
 @Setter
 public class Transaction {
     @Id
-    @GeneratedValue(generator = "UUID")
+    @GeneratedValue(strategy = GenerationType.AUTO)//@GeneratedValue(generator = "UUID")
     @Column(name = "id")
-    private UUID id;
+    private Long id;
     @Column(name = "type")
     private String type;
     @Column(name = "amount")
-    private double amount;
+    private Double amount;
     @Column(name = "description")
     private String description;
     @Column(name = "created_at")
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "debit_account_id", referencedColumnName = "id")
+    private Account debitAccountId;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "credit_account_id", referencedColumnName = "id")
+    private Account creditAccountId;
+
 }

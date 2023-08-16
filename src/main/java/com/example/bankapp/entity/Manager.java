@@ -1,27 +1,23 @@
 package com.example.bankapp.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
+@Data
 @Entity
 @Table(name = "managers")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Manager {
 
     @Id
-    @GeneratedValue(generator = "UUID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
@@ -32,7 +28,7 @@ public class Manager {
     private String lastName;
 
     @Column(name = "status")
-    private int status;
+    private String status;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

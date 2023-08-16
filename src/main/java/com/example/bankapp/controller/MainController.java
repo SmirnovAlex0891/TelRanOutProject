@@ -1,7 +1,9 @@
 package com.example.bankapp.controller;
 
+import com.example.bankapp.entity.Manager;
 import com.example.bankapp.entity.User;
 import com.example.bankapp.entity.enums.Role;
+import com.example.bankapp.repository.ManagerRepository;
 import com.example.bankapp.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +22,23 @@ public class MainController {
 
     @GetMapping("/")
     public String greeting(Map<String, Object> model) {
+
         return "greeting";
+    }
+
+    @GetMapping("/main")
+    public String main(Map<String, Object> model) {
+        return "main";
     }
 
     @GetMapping("/registration")
     public String registration() {
+
         return "registration";
     }
 
     @PostMapping("/registration")
     public String addUser(User user, Map<String, Object> model) {
-        System.out.println(user.getUsername() + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         User userFromDb = userRepository.findByUsername(user.getUsername());
 
         if (userFromDb != null) {
@@ -43,14 +51,6 @@ public class MainController {
 
         return "redirect:/login";
     }
-    @GetMapping("/main")
-    public String main(Map<String, Object> model) {
 
-        return "main";
-    }
 
-    @GetMapping(path = "/manager")
-    public String manager() {
-        return "managers";
-    }
 }

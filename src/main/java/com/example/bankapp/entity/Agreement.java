@@ -17,9 +17,9 @@ import java.util.UUID;
 @Setter
 public class Agreement {
     @Id
-    @GeneratedValue(generator = "UUID")
+    @GeneratedValue(strategy = GenerationType.AUTO)//@GeneratedValue(generator = "UUID")
     @Column(name = "id")
-    private UUID id;
+    private Long id;
     @Column(name = "interest_rate")
     private double interestRate;
     @Column(name = "status")
