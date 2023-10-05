@@ -29,10 +29,10 @@ public class Transaction {
     private String description;
     @Column(name = "created_at")
     private LocalDateTime createdAt;
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToOne()
     @JoinColumn(name = "debit_account_id", referencedColumnName = "id")
     private Account debitAccountId;
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToOne()
     @JoinColumn(name = "credit_account_id", referencedColumnName = "id")
     private Account creditAccountId;
 

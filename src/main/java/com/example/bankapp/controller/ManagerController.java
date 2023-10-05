@@ -12,11 +12,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/api/manager")
+@RequestMapping("/manager")
 @RequiredArgsConstructor
 public class ManagerController {
 
     private final ManagerService managerService;
+
+    @GetMapping()
+    public String managers(Map<String, Object> model) {
+        model.put("managers", managerService.getAllManagers());
+        return "managers";
+    }
 
     @GetMapping(path = "/all")
     public ResponseEntity<?> getAllManagers() {

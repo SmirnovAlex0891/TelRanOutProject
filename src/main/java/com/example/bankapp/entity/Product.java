@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.UUID;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "products")
@@ -28,7 +28,7 @@ public class Product {
     private String currencyCode;
     @Column(name = "interest_rate")
     private double interestRate;
-    @Column(name = "limit")
+    @Column(name = "product_lim")
     private int limit;
     @Column(name = "created_at")
     private Timestamp createdAt;

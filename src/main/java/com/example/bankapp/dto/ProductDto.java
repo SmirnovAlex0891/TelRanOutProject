@@ -1,33 +1,32 @@
 package com.example.bankapp.dto;
 
-import com.example.bankapp.entity.Account;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Set;
 
 @Component
 @NoArgsConstructor
 @Getter
 @Setter
-public class ClientDto {
-    private Long id;
+public class ProductDto {
+
+    private String name;
+
     private String status;
-    private String taxCode;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String address;
-    private String phone;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+
+    private String currencyCode;
+
+    private double interestRate;
+
+    private int limit;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDateTime createdAt;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDateTime updatedAt;
-    private String managerLastName;
-    private Set<String> accounts;
+
 }

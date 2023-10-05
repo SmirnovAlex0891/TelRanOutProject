@@ -6,7 +6,9 @@ import lombok.*;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 
@@ -44,6 +46,8 @@ public class Client {
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "manager_id", referencedColumnName = "id")
     private Manager manager;
+    @OneToMany(mappedBy = "client",cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    private Set<Account> accounts;
 
     @Override
     public boolean equals(Object o) {

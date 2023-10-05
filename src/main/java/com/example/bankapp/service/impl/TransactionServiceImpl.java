@@ -14,6 +14,8 @@ import com.example.bankapp.service.exception.AccountNotFoundException;
 import com.example.bankapp.service.exception.ErrorMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,17 +28,36 @@ public class TransactionServiceImpl implements TransactionService {
     private final AccountRepository accountRepository;
 
 
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     @Override
     public TransactionAfterCreateDto createTransaction(CreateTransactionDto dto) {
-        Account debitAccount = checkDebitAccountName(dto.getDebitAccountName());
-        Transaction transaction = new Transaction();
-        transaction.setAmount(dto.getAmount());
-        transaction.setDescription(dto.getDescription());
-        transaction.setType(dto.getType());
-        transaction.setCreatedAt(LocalDateTime.now());
-        transaction.setDebitAccountId(debitAccount);
-        transaction.setCreditAccountId(accountRepository.findAccountByName(dto.getCreditAccountName()).get());
-        return transactionMapper.transactionToAfterCreateDto(transactionRepository.save(transaction));
+        Account debitAccount = checkAccountName(dto.getDebitAccountName());
+        Account creditAccount = checkAccountName(dto.getCreditAccountName());
+        //Double interestRate = creditAccount.getAgreement().getInterestRate();
+        //Double sumForCreditAccount = dto.getAmount() + (dto.getAmount() * interestRate);
+
+        creditAccount.setBalance((creditAccount.getBalance() - dto.getAmount()));
+        accountRepository.save(creditAccount);
+        debitAccount.setBalance((debitAccount.getBalance() + dto.getAmount()));
+        accountRepository.save(debitAccount);
+
+        Transaction transactionDebitAccount = new Transaction();
+        transactionDebitAccount.setAmount(dto.getAmount());
+        transactionDebitAccount.setDescription(dto.getDescription());
+        transactionDebitAccount.setType(dto.getType());
+        transactionDebitAccount.setCreatedAt(LocalDateTime.now());
+        transactionDebitAccount.setDebitAccountId(debitAccount);
+        transactionDebitAccount.setCreditAccountId(creditAccount);
+
+        Transaction transactionCreditAccount = new Transaction();
+        transactionCreditAccount.setAmount(dto.getAmount());
+        transactionCreditAccount.setDescription(dto.getDescription());
+        transactionCreditAccount.setType("receiving");
+        transactionCreditAccount.setCreatedAt(LocalDateTime.now());
+        transactionCreditAccount.setDebitAccountId(debitAccount);
+        transactionCreditAccount.setCreditAccountId(creditAccount);
+        transactionRepository.save(transactionCreditAccount);
+        return transactionMapper.transactionToAfterCreateDto(transactionRepository.save(transactionDebitAccount));
     }
 
     @Override
@@ -45,7 +66,7 @@ public class TransactionServiceImpl implements TransactionService {
         return transactionMapper.toTransactionDtoList(transactionRepository.findAll());
     }
 
-    private Account checkDebitAccountName(String debitAccountName) {
+    private Account checkAccountName(String debitAccountName) {
         return accountRepository.findAccountByName(debitAccountName).orElseThrow(() -> new AccountNotFoundException(ErrorMessage.ACCOUNT_NOT_FOUND));
     }
 }

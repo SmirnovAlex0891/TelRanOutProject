@@ -153,11 +153,11 @@
             <column name="interest_rate" type="decimal(6,4)">
                 <constraints nullable="false"/>
             </column>
-            <column name="limit" type="integer">
+            <column name="product_lim" type="integer">
                 <constraints nullable="false"/>
             </column>
-            <column name="created_at" type="TIMESTAMP" defaultValueDate="CURRENT_TIMESTAMP"/>
-            <column name="updated_at" type="TIMESTAMP"/>
+            <column name="created_at" type="TIMESTAMP"/> <!-- defaultValueDate="CURRENT_TIMESTAMP"/> -->
+            <column name="updated_at" type="TIMESTAMP" defaultValueDate="CURRENT_TIMESTAMP"/>
             <column name="manager_id" type="integer">        <!-- <column name="manager_id" type="binary(16)"> -->
                 <constraints foreignKeyName="manager_id_fk" references="managers(id)"
                              nullable="false"/>

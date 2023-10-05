@@ -70,6 +70,18 @@
             <column name="updated_at" value="2023-07-05"/>
             <column name="manager_id" value="1003"/>
         </insert>
+        <insert tableName="clients">
+            <column name="id" value="2004"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="tax_code" value="XXX"/>
+            <column name="first_name" value="Genadiy"/>
+            <column name="last_name" value="Buckin"/>
+            <column name="email" value="buckin@gmail.com"/>
+            <column name="address" value="Grodno, ul. Sovetskaya 15/31"/>
+            <column name="phone" value="+375 (33) 788-32-21"/>
+            <column name="updated_at" value="2023-07-05"/>
+            <column name="manager_id" value="1003"/>
+        </insert>
     </changeSet>
 
     <changeSet id="insert test data into accounts table" author="SmA">
@@ -79,7 +91,7 @@
             <column name="type" value="x???"/>
             <column name="status" value="ACTIVE"/>
             <column name="balance" value="1000"/>
-            <column name="currency_code" value="usd"/>
+            <column name="currency_code" value="USD"/>
             <column name="updated_at" value="2023-06-04"/>
             <column name="client_id" value="2001"/>
         </insert>
@@ -89,7 +101,7 @@
             <column name="type" value="x???"/>
             <column name="status" value="ACTIVE"/>
             <column name="balance" value="2000"/>
-            <column name="currency_code" value="usd"/>
+            <column name="currency_code" value="USD"/>
             <column name="updated_at" value="2023-05-04"/>
             <column name="client_id" value="2002"/>
         </insert>
@@ -99,9 +111,19 @@
             <column name="type" value="x???"/>
             <column name="status" value="ACTIVE"/>
             <column name="balance" value="500"/>
-            <column name="currency_code" value="usd"/>
+            <column name="currency_code" value="USD"/>
             <column name="updated_at" value="2023-02-10"/>
             <column name="client_id" value="2003"/>
+        </insert>
+        <insert tableName="accounts">
+            <column name="id" value="3004"/>
+            <column name="name" value="BY86 AKBB 1010 0000 0030 6600 0000"/>
+            <column name="type" value="CREDIT"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="balance" value="1000"/>
+            <column name="currency_code" value="USD"/>
+            <column name="updated_at" value="2023-02-10"/>
+            <column name="client_id" value="2004"/>
         </insert>
     </changeSet>
 
@@ -146,9 +168,10 @@
             <column name="name" value="departure service"/>
             <column name="status" value="ACTIVE"/>
             <column name="currency_code" value="x???"/>
-            <column name="interest_rate" value="0.5"/>
-            <column name="limit" value="10000"/>
-            <column name="updated_at" value="2023-07-05"/>
+            <column name="interest_rate" value="0.005"/>
+            <column name="product_lim" value="10000"/>
+            <column name="created_at" value="2022.05.01"/>
+            <column name="updated_at" value="2023.07.05"/>
             <column name="manager_id" valueComputed="1003"/>
         </insert>
         <insert tableName="products">
@@ -157,8 +180,9 @@
             <column name="status" value="ACTIVE"/>
             <column name="currency_code" value="x???"/>
             <column name="interest_rate" value="0.00"/>
-            <column name="limit" value="10000"/>
-            <column name="updated_at" value="2023-07-05"/>
+            <column name="product_lim" value="10000"/>
+            <column name="created_at" value="2022.05.01"/>
+            <column name="updated_at" value="2023.07.05"/>
             <column name="manager_id" valueComputed="1002"/>
         </insert>
     </changeSet>
@@ -166,7 +190,7 @@
     <changeSet id="insert test data into agreements table" author="SmA">
         <insert tableName="agreements">
             <column name="id" value="6001"/>
-            <column name="interest_rate" value="0.5"/>
+            <column name="interest_rate" value="0.005"/>
             <column name="status" value="ACTIVE"/>
             <column name="sum" value="1000"/>
             <column name="updated_at" value="2023-07-05"/>
@@ -175,7 +199,7 @@
         </insert>
         <insert tableName="agreements">
             <column name="id" value="6002"/>
-            <column name="interest_rate" value="0.5"/>
+            <column name="interest_rate" value="0.005"/>
             <column name="status" value="ACTIVE"/>
             <column name="sum" value="2000"/>
             <column name="updated_at" value="2023-07-05"/>
@@ -184,11 +208,20 @@
         </insert>
         <insert tableName="agreements">
             <column name="id" value="6003"/>
-            <column name="interest_rate" value="0.5"/>
+            <column name="interest_rate" value="0.005"/>
             <column name="status" value="ACTIVE"/>
             <column name="sum" value="500"/>
             <column name="updated_at" value="2023-07-05"/>
             <column name="account_id" value="3003"/>
+            <column name="product_id" value="5001"/>
+        </insert>
+        <insert tableName="agreements">
+            <column name="id" value="6004"/>
+            <column name="interest_rate" value="0.005"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="sum" value="500"/>
+            <column name="updated_at" value="2023-07-05"/>
+            <column name="account_id" value="3004"/>
             <column name="product_id" value="5001"/>
         </insert>
     </changeSet>

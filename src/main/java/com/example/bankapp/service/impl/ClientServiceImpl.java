@@ -37,6 +37,16 @@ public class ClientServiceImpl implements ClientService {
         return clientMapper.clientToClientDto(clientRepository.save(client));
     }
 
+    @Override
+    public ClientDto getClientById(Long id) {
+        return clientMapper.clientToClientDto(clientRepository.findById(id).orElse(null));
+    }
+
+    @Override
+    public void deleteClientById(Long id) {
+        clientRepository.deleteById(id);
+    }
+
     private void checkClientNotExist(Client client) {
         clientRepository.findAll().forEach(c -> {
             if (c.equals(client)) {

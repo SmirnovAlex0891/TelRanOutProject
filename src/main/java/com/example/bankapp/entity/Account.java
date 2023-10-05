@@ -1,5 +1,7 @@
 package com.example.bankapp.entity;
 
+import com.example.bankapp.entity.enums.CurrencyType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,14 +34,19 @@ public class Account {
     @Column(name = "balance")
     private Double balance;
     @Column(name = "currency_code")
-    private String currencyCode;
+    @Enumerated(EnumType.STRING)
+    private CurrencyType currencyCode;
     @Column(name = "created_at")
     private LocalDateTime createdAt;
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-    @ManyToOne()
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;
+
+    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Agreement agreement;
 
     @Override
     public boolean equals(Object o) {

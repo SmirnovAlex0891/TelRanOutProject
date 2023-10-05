@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/transaction")
 @RequiredArgsConstructor
 public class TransactionController {
 
     private final TransactionService transactionService;
 
-    @GetMapping("/transaction/all")
+    @GetMapping("/all")
     public List<TransactionAfterCreateDto> getAllTransactions() {
 
         return transactionService.getAllTransactions();
     }
 
-    @PostMapping("/transaction/new")
+    @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
     public TransactionAfterCreateDto createTransaction(@RequestBody CreateTransactionDto createTransactionDto) {
         return transactionService.createTransaction(createTransactionDto);
