@@ -5,6 +5,7 @@ import com.example.bankapp.entity.enums.ManagerStatus;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -33,9 +34,9 @@ public class Manager {
     @Enumerated(EnumType.STRING)
     private ManagerStatus status;
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
     @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    private LocalDate updatedAt;
     @OneToMany(mappedBy = "manager", fetch = FetchType.LAZY, orphanRemoval = true)
     private Set<Client> clients;
     @OneToMany(mappedBy = "manager", fetch = FetchType.LAZY, orphanRemoval = true)

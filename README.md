@@ -65,7 +65,7 @@ ___
 | type               | varchar(50)   | transaction type  from enum TransactionType | 
 | amount             | decimal(12,4) | transaction amount - not null               | 
 | description        | varchar(255)  | description of transaction                  | 
-| created_at         | timestamp     | timestamp of entity creation                | 
+| created_at         | date          | date of entity creation                     | 
 | debit_account_id   | integer       | account`s id FK references accounts(id)     | 
 | credit_account_id  | integer       | account`s id FK references accounts(id)     | 
 

@@ -32,7 +32,7 @@ public class ClientControllerTest {
     public void shouldGetClientById() throws Exception {
         //given
         String clientId = "2003";
-        ClientDto clientDto = DtoCreator.getClientDto();
+        ClientDto expectedResult = DtoCreator.getClientDto();
         //when
         MvcResult clientControllerGetResult = mockMvc.perform(
                 MockMvcRequestBuilders.get("/client/" + clientId)
@@ -40,10 +40,10 @@ public class ClientControllerTest {
                         .with(httpBasic("admin@bankapp.com", "100")))
                 .andReturn();
         String clientControllerGetResultJson = clientControllerGetResult.getResponse().getContentAsString();
-        ClientDto testClientDto = objectMapper.readValue(clientControllerGetResultJson, ClientDto.class);
+        ClientDto actualResult = objectMapper.readValue(clientControllerGetResultJson, ClientDto.class);
         //then
         Assertions.assertEquals(200, clientControllerGetResult.getResponse().getStatus());
-        Assertions.assertEquals(clientDto.getId(), testClientDto.getId());
+        Assertions.assertEquals(expectedResult, actualResult);
     }
 
     @Test

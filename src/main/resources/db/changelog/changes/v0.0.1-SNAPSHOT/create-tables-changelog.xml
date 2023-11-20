@@ -102,7 +102,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="description" type="VARCHAR(255)"/>
-            <column name="created_at" type="TIMESTAMP"/>
+            <column name="created_at" type="DATE"/>
             <column name="debit_account_id" type="integer">      <!-- <column name="debit_account_id" type="binary(16)"> -->
                 <constraints foreignKeyName="debit_account_id" references="accounts(id)"/>
             </column>

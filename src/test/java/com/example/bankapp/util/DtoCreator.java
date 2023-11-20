@@ -28,8 +28,8 @@ public class DtoCreator {
                 "IN_USE",
                 1000.0,
                 "USD",
-                "2021-03-02T00:00:00",
-                "2023-06-04T00:00:00",
+                "2021-03-02",
+                "2023-06-04",
                 "Cherkasov",
                 6001L,
                 Set.of(4001L),
@@ -44,18 +44,18 @@ public class DtoCreator {
                 "rojkov@gmail.com",
                 "Brest, st. Masherova 27/99",
                 "+375 (33) 777-44-22",
-                "2021-01-15T00:00:00",
-                "2023-08-01T00:00:00",
+                "2021-01-15",
+                "2023-08-01",
                 "Ivanov",
-                Set.of("LT60 1010 0123 4567 8901"));
+                Set.of("LT60 1010 0123 4567 8901", "LT60 1010 0123 4567 8911"));
     }
     public static List<ManagerDto> getListManagersDto() {
         return new ArrayList<>(List.of(new ManagerDto(
                 "Petr",
                 "Sorokin",
                 "CLIENT_MANAGER",
-                "2016-05-18T00:00:00",
-                "2023-06-03T00:00:00",
+                "2016-05-18",
+                "2023-06-03",
                 Set.of(new ClientAndAccountBalanceDto(
                         "Igor",
                         "Usmanov",
