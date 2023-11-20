@@ -5,7 +5,7 @@ Data consist of clients, accounts, products, accounts, transactions and managers
 ___
 
 ### Database Diagram
-![PhotoBase](https://github.com/SmirnovAlex0891/TelRanOutProject/Db_diagram.jpg)
+![PhotoBase](https://github.com/SmirnovAlex0891/TelRanOutProject/blob/master/DB_diagram.jpg)
 
 ___
 ## Database Structure
