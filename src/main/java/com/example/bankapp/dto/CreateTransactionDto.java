@@ -1,14 +1,12 @@
 package com.example.bankapp.dto;
 
-import com.example.bankapp.validation.annotation.PositiveDecimal;
+import com.example.bankapp.validation.annotation.PositiveDouble;
 import lombok.Value;
-
-import java.math.BigDecimal;
 
 @Value
 public class CreateTransactionDto {
-    String type;
-    @PositiveDecimal
+    String typeTransaction;
+    @PositiveDouble
     Double amount;
     String description;
     String debitAccountName;

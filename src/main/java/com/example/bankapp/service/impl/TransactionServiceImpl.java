@@ -1,24 +1,23 @@
 package com.example.bankapp.service.impl;
 
 import com.example.bankapp.dto.CreateTransactionDto;
-import com.example.bankapp.dto.TransactionAfterCreateDto;
+import com.example.bankapp.dto.TransactionDto;
 import com.example.bankapp.entity.Account;
 import com.example.bankapp.entity.Client;
 import com.example.bankapp.entity.Transaction;
+import com.example.bankapp.entity.enums.AccountStatus;
 import com.example.bankapp.mapper.TransactionMapper;
 import com.example.bankapp.repository.AccountRepository;
 import com.example.bankapp.repository.ClientRepository;
 import com.example.bankapp.repository.TransactionRepository;
 import com.example.bankapp.service.TransactionService;
-import com.example.bankapp.service.exception.AccountNotFoundException;
-import com.example.bankapp.service.exception.ErrorMessage;
+import com.example.bankapp.service.exception.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import java.security.Principal;
 
 @Service
 @RequiredArgsConstructor
@@ -26,47 +25,44 @@ public class TransactionServiceImpl implements TransactionService {
     private final TransactionRepository transactionRepository;
     private final TransactionMapper transactionMapper;
     private final AccountRepository accountRepository;
-
-
+    private final ClientRepository clientRepository;
+    @Override
     @Transactional(isolation = Isolation.REPEATABLE_READ)
-    @Override
-    public TransactionAfterCreateDto createTransaction(CreateTransactionDto dto) {
+    public TransactionDto createTransaction(CreateTransactionDto dto, Principal principal) {
         Account debitAccount = checkAccountName(dto.getDebitAccountName());
-        Account creditAccount = checkAccountName(dto.getCreditAccountName());
-        //Double interestRate = creditAccount.getAgreement().getInterestRate();
-        //Double sumForCreditAccount = dto.getAmount() + (dto.getAmount() * interestRate);
+        Account creditAccount = checkCreditAccountNameByEmail(dto.getCreditAccountName(), principal.getName());
+        Transaction transaction = transactionMapper.toTransaction(dto);
+        if (creditAccount.getBalance() >= dto.getAmount()) {
+            creditAccount.setBalance((creditAccount.getBalance() - dto.getAmount()));
+            accountRepository.save(creditAccount);
+            debitAccount.setBalance((debitAccount.getBalance() + dto.getAmount()));
+            accountRepository.save(debitAccount);
+            transaction.setCreditAccount(creditAccount);
+            transaction.setDebitAccount(debitAccount);
+            transactionRepository.save(transaction);
+            return transactionMapper.transactionToDto(transactionRepository.save(transaction));
+        }
+        throw new InsufficientFundsException(String.format(
+                ErrorMessage.INSUFFICIENT_FUNDS, creditAccount.getName()));
 
-        creditAccount.setBalance((creditAccount.getBalance() - dto.getAmount()));
-        accountRepository.save(creditAccount);
-        debitAccount.setBalance((debitAccount.getBalance() + dto.getAmount()));
-        accountRepository.save(debitAccount);
-
-        Transaction transactionDebitAccount = new Transaction();
-        transactionDebitAccount.setAmount(dto.getAmount());
-        transactionDebitAccount.setDescription(dto.getDescription());
-        transactionDebitAccount.setType(dto.getType());
-        transactionDebitAccount.setCreatedAt(LocalDateTime.now());
-        transactionDebitAccount.setDebitAccountId(debitAccount);
-        transactionDebitAccount.setCreditAccountId(creditAccount);
-
-        Transaction transactionCreditAccount = new Transaction();
-        transactionCreditAccount.setAmount(dto.getAmount());
-        transactionCreditAccount.setDescription(dto.getDescription());
-        transactionCreditAccount.setType("receiving");
-        transactionCreditAccount.setCreatedAt(LocalDateTime.now());
-        transactionCreditAccount.setDebitAccountId(debitAccount);
-        transactionCreditAccount.setCreditAccountId(creditAccount);
-        transactionRepository.save(transactionCreditAccount);
-        return transactionMapper.transactionToAfterCreateDto(transactionRepository.save(transactionDebitAccount));
     }
-
-    @Override
-    public List<TransactionAfterCreateDto> getAllTransactions() {
-
-        return transactionMapper.toTransactionDtoList(transactionRepository.findAll());
+    private Account checkAccountName(String accountName) {
+        Account account = accountRepository.findAccountByName(accountName)
+                .orElseThrow(() -> new AccountNotFoundException(String.format(
+                        ErrorMessage.ACCOUNT_BY_NAME_NOT_FOUND, accountName)));
+        if (account.getStatus() != AccountStatus.IN_USE) {
+            throw new AccountIsNotActiveException(String.format(
+                    ErrorMessage.ACCOUNT_IS_NOT_ACTIVE, accountName));
+        }
+        return account;
     }
-
-    private Account checkAccountName(String debitAccountName) {
-        return accountRepository.findAccountByName(debitAccountName).orElseThrow(() -> new AccountNotFoundException(ErrorMessage.ACCOUNT_NOT_FOUND));
+    private Account checkCreditAccountNameByEmail(String accountName, String email) {
+        Client client = clientRepository.findClientByEmail(email).get();
+        if (client.getAccounts().stream()
+                .map(Account::getName)
+                .anyMatch(n -> n.equals(accountName))) {
+            return checkAccountName(accountName);
+        }
+        throw new ClientNotHaveAccountException(String.format(ErrorMessage.CLIENT_NOT_HAVE_ACCOUNT, email, accountName));
     }
 }

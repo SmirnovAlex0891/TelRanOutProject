@@ -1,16 +1,15 @@
 package com.example.bankapp.entity;
 
 
-import lombok.*;
+import com.example.bankapp.entity.enums.ClientStatus;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Objects;
 import java.util.Set;
-import java.util.UUID;
-
 
 @Entity
 @Table(name = "clients")
@@ -18,15 +17,14 @@ import java.util.UUID;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 public class Client {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
     @Column(name = "status")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private ClientStatus status;
     @Column(name = "tax_code")
     private String taxCode;
     @Column(name = "first_name")
@@ -35,6 +33,8 @@ public class Client {
     private String lastName;
     @Column(name = "email")
     private String email;
+    @Column(name = "client_password")
+    private String password;
     @Column(name = "address")
     private String address;
     @Column(name = "phone")
@@ -43,22 +43,9 @@ public class Client {
     private LocalDateTime createdAt;
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id", referencedColumnName = "id")
     private Manager manager;
-    @OneToMany(mappedBy = "client",cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private Set<Account> accounts;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Client client = (Client) o;
-        return Objects.equals(email, client.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(email);
-    }
 }

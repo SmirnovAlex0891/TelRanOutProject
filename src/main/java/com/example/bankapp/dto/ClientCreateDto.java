@@ -1,21 +1,14 @@
 package com.example.bankapp.dto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import org.springframework.stereotype.Component;
+import lombok.Value;
 
-@Component
-@NoArgsConstructor
-@Getter
-@Setter
+@Value
 public class ClientCreateDto {
-    private String taxCode;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String address;
-    private String phone;
-    private String managerLastName;
+    String taxCode;
+    String firstName;
+    String lastName;
+    String email;
+    String address;
+    String phone;
+    String managerLastName;
 }

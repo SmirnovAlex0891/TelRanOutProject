@@ -1,70 +1,33 @@
 package com.example.bankapp.controller;
 
+import com.example.bankapp.dto.ManagerDto;
 import com.example.bankapp.service.ManagerService;
-import com.example.bankapp.service.exception.ManagerNotAddedException;
 import com.example.bankapp.service.exception.ManagerNotFoundException;
+import io.swagger.annotations.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
+import javax.annotation.processing.Generated;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
-@Controller
+@RestController
 @RequestMapping("/manager")
 @RequiredArgsConstructor
 public class ManagerController {
 
     private final ManagerService managerService;
 
-    @GetMapping()
-    public String managers(Map<String, Object> model) {
-        model.put("managers", managerService.getAllManagers());
-        return "managers";
-    }
-
-    @GetMapping(path = "/all")
-    public ResponseEntity<?> getAllManagers() {
-        return new ResponseEntity<>(managerService.getAllManagers(), HttpStatus.OK);
-    }
-
-    @PostMapping("/add")
-    public String addManager(@RequestParam String firstname, @RequestParam String lastname, Map<String, Object> model) {
-        try {
-            managerService.addManager(lastname, firstname);
-            model.put("add", "Manager " + lastname + " " + firstname + " added successfully");
-        } catch (ManagerNotAddedException e) {
-            model.put("errors_add", e.getMessage());
-        }
-
-        return "managers";
-    }
-
-    @PostMapping(path = "/filter")
-    public String getManagerByName(@RequestParam String lastname, Map<String, Object> model) {
-        if (lastname != null && !lastname.isEmpty()) {
-            try {
-                model.put("managers", managerService.getManagerByName(lastname));
-            } catch (ManagerNotFoundException e) {
-                model.put("errors_filter", e.getMessage());
-            }
-
-        } else {
-            model.put("managers", managerService.getAllManagers());
-        }
-        return "managers";
-    }
-
-    @PostMapping("/delete")
-    public String deleteManager(@RequestParam String firstname, @RequestParam String lastname, Map<String, Object> model) {
-
-        try {
-            managerService.deleteManager(lastname, firstname);
-        } catch (ManagerNotFoundException e) {
-            model.put("errors_delete", e.getMessage());
-        }
-
-        return "managers";
+    @GetMapping("/all/{balance}")
+    public List<ManagerDto> getManagers(@PathVariable("balance") Double balance) {
+        return managerService.getManagers(balance);
     }
 }

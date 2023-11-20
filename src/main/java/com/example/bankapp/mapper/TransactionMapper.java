@@ -1,21 +1,31 @@
 package com.example.bankapp.mapper;
 
-import com.example.bankapp.dto.TransactionAfterCreateDto;
+import com.example.bankapp.dto.CreateTransactionDto;
+import com.example.bankapp.dto.TransactionDto;
 import com.example.bankapp.entity.Transaction;
+import com.example.bankapp.entity.enums.TransactionType;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Named;
 
-import java.util.List;
+import java.time.LocalDate;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", imports = {LocalDate.class})
 public interface TransactionMapper {
-    @Mapping(source = "transaction.debitAccountId.name", target = "debitAccountName")
-    @Mapping(source = "transaction.debitAccountId.client.firstName", target = "debitClientFirstName")
-    @Mapping(source = "transaction.debitAccountId.client.lastName", target = "debitClientLastName")
-    @Mapping(source = "transaction.creditAccountId.name", target = "creditAccountName")
-    @Mapping(source = "transaction.creditAccountId.client.firstName", target = "creditAccountFirstName")
-    @Mapping(source = "transaction.creditAccountId.client.lastName", target = "creditAccountLastName")
-    TransactionAfterCreateDto transactionToAfterCreateDto(Transaction transaction);
+    @Mapping(source = "transaction.debitAccount.name", target = "debitAccountName")
+    @Mapping(source = "transaction.debitAccount.client.firstName", target = "debitClientFirstName")
+    @Mapping(source = "transaction.debitAccount.client.lastName", target = "debitClientLastName")
+    @Mapping(source = "transaction.creditAccount.name", target = "creditAccountName")
+    @Mapping(source = "transaction.creditAccount.client.firstName", target = "creditAccountFirstName")
+    @Mapping(source = "transaction.creditAccount.client.lastName", target = "creditAccountLastName")
+    TransactionDto transactionToDto(Transaction transaction);
 
-    List<TransactionAfterCreateDto> toTransactionDtoList(List<Transaction> transactions);
+    @Mapping(target = "createdAt", expression = "java(LocalDate.now())")
+    @Mapping(source = "typeTransaction", target = "type", qualifiedByName = "mappingTransactionType")
+    Transaction toTransaction(CreateTransactionDto dto);
+
+    @Named("mappingTransactionType")
+    default TransactionType mappingTransactionType(String type) {
+        return TransactionType.valueOf(type);
+    }
 }

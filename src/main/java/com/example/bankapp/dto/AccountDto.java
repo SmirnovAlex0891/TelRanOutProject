@@ -1,41 +1,21 @@
 package com.example.bankapp.dto;
 
-import com.example.bankapp.entity.Agreement;
-import com.example.bankapp.entity.Client;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.stereotype.Component;
+import lombok.Value;
 
-import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Set;
 
-@Component
-@NoArgsConstructor
-@Getter
-@Setter
+@Value
 public class AccountDto {
-
-    private Long id;
-
-    private String name;
-
-    private String type;
-
-    private String status;
-
-    private Double balance;
-
-    private String currencyCode;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private LocalDateTime createdAt;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private LocalDateTime updatedAt;
-
-    private String clientLastName;
-
-    private Long agreementId;
+    Long id;
+    String name;
+    String type;
+    String status;
+    Double balance;
+    String currencyType;
+    String createdAt;
+    String updatedAt;
+    String clientLastName;
+    Long agreementId;
+    Set<Long> creditTransactions;
+    Set<Long> debitTransactions;
 }

@@ -1,0 +1,32 @@
+version: '3.6'
+
+services:
+  app:
+    image: alexsm0891/bank-app:0.0.3
+    container_name: bank-app-test
+    ports:
+      - '80:8081'
+    restart: unless-stopped
+    depends_on:
+      - my_db
+    networks:
+      - my_network
+
+  my_db:
+    image: mysql
+    container_name: my-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      - my_network
+    volumes:
+      - my-db-mysql:/var/lib/mysql
+
+networks:
+  my_network:
+    name: my_network
+    driver: bridge
+
+volumes:
+  my-db-mysql:

@@ -6,17 +6,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface ManagerRepository extends JpaRepository<Manager, Long> {
-
-
-    @Query("SELECT a FROM Manager a WHERE a.lastName=:lastname")
-    Optional<Manager> findManagerByLastName(@Param("lastname") String lastName);
-
-    Optional<Manager> findManagerById(Long id);
-
-    Optional<Manager> findManagerByLastNameAndFirstName(String lastname, String firstname);
-
+    String s = "SELECT m FROM Manager m JOIN m.clients c JOIN c.accounts ac WHERE ac.balance >= :balance";
+    @Query(value = s)
+    Optional<List<Manager>> findManagerByBalance(@Param("balance") Double balance);
+    Optional<Manager> findManagerByEmail(String email);
 }

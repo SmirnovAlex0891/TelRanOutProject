@@ -1,17 +1,16 @@
 package com.example.bankapp.entity;
 
+import com.example.bankapp.entity.enums.AccountStatus;
+import com.example.bankapp.entity.enums.AccountType;
 import com.example.bankapp.entity.enums.CurrencyType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.Set;
 
 @Entity
 @Table(name = "accounts")
@@ -20,44 +19,34 @@ import java.util.UUID;
 @Getter
 @Setter
 public class Account {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)//@GeneratedValue(generator = "UUID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
     @Column(name = "name")
     private String name;
     @Column(name = "type")
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private AccountType type;
     @Column(name = "status")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private AccountStatus status;
     @Column(name = "balance")
     private Double balance;
-    @Column(name = "currency_code")
+    @Column(name = "currency_type")
     @Enumerated(EnumType.STRING)
-    private CurrencyType currencyCode;
+    private CurrencyType currencyType;
     @Column(name = "created_at")
     private LocalDateTime createdAt;
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;
-
-    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "account", fetch = FetchType.LAZY, orphanRemoval = true)
     private Agreement agreement;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Account account = (Account) o;
-        return Objects.equals(name, account.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
-    }
+    @OneToMany(mappedBy = "creditAccount", fetch = FetchType.LAZY, orphanRemoval = true)
+    private Set<Transaction> transactionCredit;
+    @OneToMany(mappedBy = "debitAccount", fetch = FetchType.LAZY, orphanRemoval = true)
+    private Set<Transaction> transactionDebit;
 }

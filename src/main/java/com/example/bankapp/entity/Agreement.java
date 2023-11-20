@@ -1,14 +1,13 @@
 package com.example.bankapp.entity;
 
+import com.example.bankapp.entity.enums.AccountStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Table(name = "agreements")
@@ -18,20 +17,24 @@ import java.util.UUID;
 @Setter
 public class Agreement {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)//@GeneratedValue(generator = "UUID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
     @Column(name = "interest_rate")
     private double interestRate;
     @Column(name = "status")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private AccountStatus status;
     @Column(name = "sum")
     private double sum;
     @Column(name = "created_at")
     private LocalDateTime createdAt;
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "account_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    private Product product;
 }

@@ -16,17 +16,17 @@
             <column name="id" type="integer">       <!-- <column name="id" type="binary(16)"> -->
                 <constraints primaryKey="true" nullable="false" unique="true"/>
             </column>
-            <column name="first_name" type="VARCHAR(50)">
-                <constraints nullable="false" unique="false"/>
+            <column name="first_name" type="VARCHAR(50)"/>
+            <column name="last_name" type="VARCHAR(50)"/>
+            <column name="email" type="VARCHAR(50)">
+                <constraints nullable="false" unique="true"/>
             </column>
-            <column name="last_name" type="VARCHAR(50)">
+            <column name="manager_password" type="VARCHAR(60)">
                 <constraints nullable="false"/>
             </column>
-            <column name="status" type="VARCHAR(20)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="created_at" type="date"/>
-            <column name="updated_at" type="date"/>
+            <column name="status" type="VARCHAR(20)"/>
+            <column name="created_at" type="DATE"/>
+            <column name="updated_at" type="DATE"/>
         </createTable>
     </changeSet>
 
@@ -43,26 +43,19 @@
             <column name="status" type="VARCHAR(20)">
                 <constraints nullable="false"/>
             </column>
-            <column name="tax_code" type="VARCHAR(20)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="first_name" type="VARCHAR(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="last_name" type="VARCHAR(50)">
-                <constraints nullable="false"/>
-            </column>
+            <column name="tax_code" type="VARCHAR(20)"/>
+            <column name="first_name" type="VARCHAR(50)"/>
+            <column name="last_name" type="VARCHAR(50)"/>
             <column name="email" type="VARCHAR(60)">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="address" type="VARCHAR(80)">
+            <column name="client_password" type="VARCHAR(60)">
                 <constraints nullable="false"/>
             </column>
-            <column name="phone" type="VARCHAR(20)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="created_at" type="TIMESTAMP" defaultValueDate="CURRENT_TIMESTAMP"/>
-            <column name="updated_at" type="TIMESTAMP"/>
+            <column name="address" type="VARCHAR(80)"/>
+            <column name="phone" type="VARCHAR(20)"/>
+            <column name="created_at" type="DATE"/>
+            <column name="updated_at" type="DATE"/>
             <column name="manager_id" type="integer">        <!-- <column name="manager_id" type="binary(16)"> -->
                 <constraints foreignKeyName="manager_id" references="managers(id)" nullable="false"/>
             </column>
@@ -82,20 +75,12 @@
             <column name="name" type="VARCHAR(100)">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="type" type="VARCHAR(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="status" type="VARCHAR(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="balance" type="decimal(15,2)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="currency_code" type="VARCHAR(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="created_at" type="TIMESTAMP" defaultValueDate="CURRENT_TIMESTAMP"/>
-            <column name="updated_at" type="TIMESTAMP"/>
+            <column name="type" type="VARCHAR(50)"/>
+            <column name="status" type="VARCHAR(50)"/>
+            <column name="balance" type="DECIMAL(15,2)"/>
+            <column name="currency_type" type="VARCHAR(50)"/>
+            <column name="created_at" type="DATE"/>
+            <column name="updated_at" type="DATE"/>
             <column name="client_id" type="integer">     <!-- <column name="client_id" type="binary(16)"> -->
                 <constraints foreignKeyName="client_id" references="clients(id)" nullable="false"/>
             </column>
@@ -112,16 +97,12 @@
             <column name="id" type="integer">       <!-- <column name="id" type="binary(16)"> -->
                 <constraints primaryKey="true" nullable="false" unique="true"/>
             </column>
-            <column name="type" type="VARCHAR(50)">
+            <column name="type" type="VARCHAR(50)"/>
+            <column name="amount" type="DECIMAL(12,4)">
                 <constraints nullable="false"/>
             </column>
-            <column name="amount" type="decimal(12,4)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="description" type="varchar(255)">
-                <constraints nullable="true"/>
-            </column>
-            <column name="created_at" type="TIMESTAMP" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="created_at" type="TIMESTAMP"/>
             <column name="debit_account_id" type="integer">      <!-- <column name="debit_account_id" type="binary(16)"> -->
                 <constraints foreignKeyName="debit_account_id" references="accounts(id)"/>
             </column>
@@ -138,29 +119,18 @@
             </not>
         </preConditions>
         <createTable tableName="products">
-            <column name="id" type="integer">        <!-- <column name="id" type="binary(16)"> -->
+            <column name="id" type="integer">                   <!-- <column name="id" type="binary(16)">-->
                 <constraints primaryKey="true" nullable="false" unique="true"/>
             </column>
-            <column name="name" type="varchar(70)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="status" type="varchar(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="currency_code" type="varchar(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="interest_rate" type="decimal(6,4)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="product_lim" type="integer">
-                <constraints nullable="false"/>
-            </column>
-            <column name="created_at" type="TIMESTAMP"/> <!-- defaultValueDate="CURRENT_TIMESTAMP"/> -->
-            <column name="updated_at" type="TIMESTAMP" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="name" type="VARCHAR(70)"/>
+            <column name="status" type="VARCHAR(50)"/>
+            <column name="currency_type" type="VARCHAR(50)"/>
+            <column name="interest_rate" type="DECIMAL(6,4)"/>
+            <column name="product_limit" type="integer"/>
+            <column name="created_at" type="DATE"/>
+            <column name="updated_at" type="DATE"/>
             <column name="manager_id" type="integer">        <!-- <column name="manager_id" type="binary(16)"> -->
-                <constraints foreignKeyName="manager_id_fk" references="managers(id)"
-                             nullable="false"/>
+                <constraints foreignKeyName="manager_id_fk" references="managers(id)"/>
             </column>
         </createTable>
     </changeSet>
@@ -175,24 +145,16 @@
             <column name="id" type="integer">        <!-- <column name="id" type="binary(16)"> -->
                 <constraints primaryKey="true" nullable="false" unique="true"/>
             </column>
-            <column name="interest_rate" type="DECIMAL(6,4)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="status" type="VARCHAR(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="sum" type="DECIMAL(15,2)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="created_at" type="TIMESTAMP" defaultValueDate="CURRENT_TIMESTAMP"/>
-            <column name="updated_at" type="TIMESTAMP"/>
+            <column name="interest_rate" type="DECIMAL(6,4)"/>
+            <column name="status" type="VARCHAR(50)"/>
+            <column name="sum" type="DECIMAL(15,2)"/>
+            <column name="created_at" type="DATE"/>
+            <column name="updated_at" type="DATE"/>
             <column name="account_id" type="integer">        <!-- <column name="account_id" type="binary(16)"> -->
-                <constraints foreignKeyName="account_id_fk" references="accounts(id)"
-                             nullable="false"/>
+                <constraints foreignKeyName="account_id_fk" references="accounts(id)"/>
             </column>
-            <column name="product_id" type="integer">        <!-- <column name="product_id" type="binary(16)"> -->
-                <constraints foreignKeyName="product_id_fk" references="products(id)"
-                             nullable="false"/>
+            <column name="product_id" type="integer">        <!-- <column name="product_id" type="binary(16)">-->
+                <constraints foreignKeyName="product_id_fk" references="products(id)"/>
             </column>
         </createTable>
     </changeSet>

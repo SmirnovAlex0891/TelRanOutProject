@@ -6,6 +6,5 @@ import com.example.bankapp.entity.Account;
 import java.util.List;
 
 public interface AccountService {
-    List<AccountDto> getAllAccounts();
-    Account getAccountById(Long id);
+    AccountDto getAccount(Double amount, Long clientId);
 }

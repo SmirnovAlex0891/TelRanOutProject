@@ -6,6 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.*;
 public class ProductController {
     private final ProductService productService;
 
-    @PostMapping("/update/{id}")
+    @PutMapping("/update/{id}")
+    @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Update an Product by id", nickname = "updateProduct", response = ProductDto.class)
     public ProductDto updateProductById(@PathVariable("id") Long id, @RequestBody ProductDto productDto) {
         return productService.updateProduct(id, productDto);
     }
+
 }

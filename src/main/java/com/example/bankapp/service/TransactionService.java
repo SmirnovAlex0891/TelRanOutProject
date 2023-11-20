@@ -1,12 +1,12 @@
 package com.example.bankapp.service;
 
 import com.example.bankapp.dto.CreateTransactionDto;
-import com.example.bankapp.dto.TransactionAfterCreateDto;
+import com.example.bankapp.dto.TransactionDto;
 import com.example.bankapp.entity.Transaction;
 
-import java.util.List;
+import java.security.Principal;
+import java.util.Optional;
 
 public interface TransactionService {
-    TransactionAfterCreateDto createTransaction(CreateTransactionDto createTransactionDto);
-    List<TransactionAfterCreateDto> getAllTransactions();
+    TransactionDto createTransaction(CreateTransactionDto createTransactionDto, Principal principal);
 }
