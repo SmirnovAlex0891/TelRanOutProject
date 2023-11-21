@@ -91,7 +91,7 @@ public class DtoCreator {
                 "TRANSFER",
                 280D,
                 "280 usd from Sender_client_name to Recipient_client_name",
-                "BY86 AKBB 1010 0000 0029 6602 0000",
+                "BY86 AKBB 1010 0000 0029 6600 0000",
                 "LT60 1010 0123 4567 8901"
         );
     }
@@ -101,7 +101,7 @@ public class DtoCreator {
                 280.0,
                 "280 usd from Sender_client_name to Recipient_client_name",
                 LocalDate.now().toString(),
-                "BY86 AKBB 1010 0000 0029 6602 0000",
+                "BY86 AKBB 1010 0000 0029 6600 0000",
                 "Igor",
                 "Usmanov",
                 "LT60 1010 0123 4567 8901",
