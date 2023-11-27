@@ -3,7 +3,6 @@ package com.example.bankapp.controller;
 import com.example.bankapp.dto.ProductDto;
 import com.example.bankapp.service.ProductService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

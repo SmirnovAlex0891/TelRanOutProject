@@ -1,19 +1,12 @@
 package com.example.bankapp.controller;
 
-import com.example.bankapp.dto.ClientCreateDto;
 import com.example.bankapp.dto.ClientDto;
-import com.example.bankapp.dto.ProductDto;
-import com.example.bankapp.entity.Client;
-import com.example.bankapp.repository.ClientRepository;
 import com.example.bankapp.service.ClientService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/client")

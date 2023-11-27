@@ -6,6 +6,7 @@ import com.example.bankapp.entity.Account;
 import com.example.bankapp.entity.Client;
 import com.example.bankapp.entity.Transaction;
 import com.example.bankapp.entity.enums.AccountStatus;
+import com.example.bankapp.entity.enums.CurrencyType;
 import com.example.bankapp.mapper.TransactionMapper;
 import com.example.bankapp.repository.AccountRepository;
 import com.example.bankapp.repository.ClientRepository;
@@ -35,7 +36,8 @@ public class TransactionServiceImpl implements TransactionService {
         if (creditAccount.getBalance() >= dto.getAmount()) {
             creditAccount.setBalance((creditAccount.getBalance() - dto.getAmount()));
             accountRepository.save(creditAccount);
-            debitAccount.setBalance((debitAccount.getBalance() + dto.getAmount()));
+            double coefficient = currencyConversionFactor(creditAccount.getCurrencyType(), debitAccount.getCurrencyType());
+            debitAccount.setBalance((debitAccount.getBalance() + dto.getAmount() * coefficient));
             accountRepository.save(debitAccount);
             transaction.setCreditAccount(creditAccount);
             transaction.setDebitAccount(debitAccount);
@@ -64,5 +66,29 @@ public class TransactionServiceImpl implements TransactionService {
             return checkAccountName(accountName);
         }
         throw new ClientNotHaveAccountException(String.format(ErrorMessage.CLIENT_NOT_HAVE_ACCOUNT, email, accountName));
+    }
+    private double currencyConversionFactor(CurrencyType first, CurrencyType second) {
+        double coefficient = 1;
+        switch (first.getValue() + "-" + second.getValue()) {
+            case "USD-EUR":
+                coefficient = 0.91;
+            break;
+            case "USD-PLN":
+                coefficient = 3.98;
+            break;
+            case "EUR-USD":
+                coefficient = 1.09;
+            break;
+            case "EUR-PLN":
+                coefficient = 4.35;
+            break;
+            case "PLN-USD":
+                coefficient = 0.25;
+            break;
+            case "PLN-EUR":
+                coefficient = 0.23;
+            break;
+        }
+        return coefficient;
     }
 }

@@ -1,6 +1,5 @@
 package com.example.bankapp.controller;
 
-import com.example.bankapp.dto.AccountDto;
 import com.example.bankapp.dto.AgreementDto;
 import com.example.bankapp.dto.ClientFirstNameLastNameDto;
 import com.example.bankapp.dto.ErrorExtensionDto;
@@ -13,17 +12,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.Collection;
-import java.util.List;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Sql("/schema.sql")
+@Sql("/insert_test_data.sql")
 public class AgreementControllerTest {
     @Autowired
     private MockMvc mockMvc;

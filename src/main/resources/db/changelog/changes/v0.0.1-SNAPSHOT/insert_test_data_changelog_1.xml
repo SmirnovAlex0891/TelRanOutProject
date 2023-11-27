@@ -196,6 +196,17 @@
             <column name="updated_at" value="2023-01-01"/>
             <column name="client_id" value="2003"/>
         </insert>
+        <insert tableName="accounts">
+            <column name="id" value="3008"/>
+            <column name="name" value="PL10 1050 0099 7603 1234 5678 8543"/>
+            <column name="type" value="CURRENT"/>
+            <column name="status" value="IN_USE"/>
+            <column name="balance" value="3000"/>
+            <column name="currency_type" value="PLN"/>
+            <column name="created_at" value="2020-02-25"/>
+            <column name="updated_at" value="2023-02-25"/>
+            <column name="client_id" value="2003"/>
+        </insert>
     </changeSet>
 
     <changeSet id="insert test data into transactions table" author="SmA">
@@ -313,6 +324,17 @@
             <column name="updated_at" value="2021-07-23"/>
             <column name="manager_id" valueComputed="1003"/>
         </insert>
+        <insert tableName="products">
+            <column name="id" value="5007"/>
+            <column name="name" value="currency account"/>
+            <column name="status" value="IN_USE"/>
+            <column name="currency_type" value="PLN"/>
+            <column name="interest_rate" value="0.010"/>
+            <column name="product_limit" value="100000"/>
+            <column name="created_at" value="2018-10-01"/>
+            <column name="updated_at" value="2021-05-12"/>
+            <column name="manager_id" valueComputed="1004"/>
+        </insert>
     </changeSet>
 
     <changeSet id="insert test data into agreements table" author="SmA">
@@ -385,6 +407,16 @@
             <column name="updated_at" value="2022-12-01"/>
             <column name="account_id" value="3007"/>
             <column name="product_id" value="5002"/>
+        </insert>
+        <insert tableName="agreements">
+            <column name="id" value="6008"/>
+            <column name="interest_rate" value="0.01"/>
+            <column name="status" value="IN_USE"/>
+            <column name="sum" value="45000"/>
+            <column name="created_at" value="2018-10-01"/>
+            <column name="updated_at" value="2022-10-01"/>
+            <column name="account_id" value="3008"/>
+            <column name="product_id" value="5007"/>
         </insert>
     </changeSet>
 

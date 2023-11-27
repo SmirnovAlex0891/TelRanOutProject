@@ -4,16 +4,11 @@ import com.example.bankapp.dto.*;
 import com.example.bankapp.entity.Account;
 import com.example.bankapp.entity.Client;
 import com.example.bankapp.entity.Transaction;
-import com.example.bankapp.entity.enums.AccountStatus;
-import com.example.bankapp.entity.enums.AccountType;
-import com.example.bankapp.entity.enums.CurrencyType;
-import com.example.bankapp.entity.enums.TransactionType;
 import com.example.bankapp.service.exception.ErrorCode;
 import lombok.experimental.UtilityClass;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

@@ -5,7 +5,6 @@ import com.example.bankapp.dto.ClientFirstNameLastNameDto;
 
 import java.security.Principal;
 import java.util.Collection;
-import java.util.Optional;
 
 public interface AgreementService {
     Collection<AgreementDto> getAgreements(ClientFirstNameLastNameDto nameDto, Principal principal);

@@ -2,17 +2,11 @@ package com.example.bankapp.mapper;
 
 import com.example.bankapp.dto.TransactionDto;
 import com.example.bankapp.entity.Transaction;
-import com.example.bankapp.repository.TransactionRepository;
-import com.example.bankapp.service.TransactionService;
 import com.example.bankapp.util.DtoCreator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDate;
-import java.util.Optional;
 
 @SpringBootTest
 public class TransactionalMapperTest {

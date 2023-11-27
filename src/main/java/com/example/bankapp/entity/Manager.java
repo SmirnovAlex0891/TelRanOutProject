@@ -1,22 +1,21 @@
 package com.example.bankapp.entity;
 
-
 import com.example.bankapp.entity.enums.ManagerStatus;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Set;
 
-@Data
 @Entity
 @Table(name = "managers")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 public class Manager {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

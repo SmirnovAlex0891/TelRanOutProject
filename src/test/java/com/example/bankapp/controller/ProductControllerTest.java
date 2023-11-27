@@ -3,16 +3,14 @@ package com.example.bankapp.controller;
 import com.example.bankapp.dto.ErrorExtensionDto;
 import com.example.bankapp.dto.ProductDto;
 import com.example.bankapp.util.DtoCreator;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import liquibase.pro.packaged.S;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -21,6 +19,8 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Sql("/schema.sql")
+@Sql("/insert_test_data.sql")
 public class ProductControllerTest {
     @Autowired
     private MockMvc mockMvc;

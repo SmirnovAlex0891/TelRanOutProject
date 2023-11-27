@@ -2,9 +2,6 @@ package com.example.bankapp.controller;
 
 import com.example.bankapp.dto.AgreementDto;
 import com.example.bankapp.dto.ClientFirstNameLastNameDto;
-import com.example.bankapp.entity.Account;
-import com.example.bankapp.entity.Agreement;
-import com.example.bankapp.repository.AgreementRepository;
 import com.example.bankapp.service.AgreementService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

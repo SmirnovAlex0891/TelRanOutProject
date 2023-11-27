@@ -3,7 +3,6 @@ package com.example.bankapp.controller;
 import com.example.bankapp.dto.ClientDto;
 import com.example.bankapp.dto.ErrorExtensionDto;
 import com.example.bankapp.repository.ClientRepository;
-import com.example.bankapp.service.impl.AccountServiceImpl;
 import com.example.bankapp.util.DtoCreator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
@@ -12,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -20,6 +20,8 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Sql("/schema.sql")
+@Sql("/insert_test_data.sql")
 public class ClientControllerTest {
     @Autowired
     private MockMvc mockMvc;
