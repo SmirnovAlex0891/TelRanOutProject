@@ -27,8 +27,8 @@ public class AccountDto {
     String clientLastName;
     @ApiModelProperty(value = "Id of agreement", dataType = "Long", example = "6001", position = 10)
     Long agreementId;
-    @ApiModelProperty(value = "List Id's sent transfers", dataType = "Set<long>", example = "4001", position = 11)
+    @ApiModelProperty(value = "List Id's sent transfers", dataType = "Set<long>", example = "[\n4001\n]", position = 11)
     Set<Long> creditTransactions;
-    @ApiModelProperty(value = "List Id's received transfers", dataType = "Set<long>", example = "4002, 4003, 4004, 4005", position = 12)
+    @ApiModelProperty(value = "List Id's received transfers", dataType = "Set<long>", example = "[\n4002,\n4003,\n4004,\n4005\n]", position = 12)
     Set<Long> debitTransactions;
 }

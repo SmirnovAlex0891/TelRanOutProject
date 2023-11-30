@@ -21,5 +21,4 @@ public class ProductController {
     public ProductDto updateProductById(@PathVariable("id") Long id, @RequestBody ProductDto productDto) {
         return productService.updateProduct(id, productDto);
     }
-
 }

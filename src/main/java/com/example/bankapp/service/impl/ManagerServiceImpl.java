@@ -23,13 +23,15 @@ import java.util.Set;
 public class ManagerServiceImpl implements ManagerService {
     private final ManagerMapper managerMapper;
     private final ManagerRepository managerRepository;
+
     @Override
     public List<ManagerDto> getManagers(Double balance) {
         return mappingManagerDto(managerMapper.toDtoList(
-                        managerRepository.findManagerByBalance(balance).orElseThrow(
-                                () -> new ManagerNotFoundException(String.format(ErrorMessage.MANAGER_NOT_FOUND, balance)))),
-                balance);
+                managerRepository.findManagerByBalance(balance).orElseThrow(
+                        () -> new ManagerNotFoundException(
+                                String.format(ErrorMessage.MANAGER_NOT_FOUND, balance)))), balance);
     }
+
     private List<ManagerDto> mappingManagerDto(List<ManagerAndClientsDto> managers, Double balance) {
         Set<ManagerDto> managersDto = new HashSet<>();
         for (ManagerAndClientsDto m : managers) {
@@ -45,7 +47,8 @@ public class ManagerServiceImpl implements ManagerService {
                 }
             }
             ManagerDto managerDto = new ManagerDto(
-                    m.getFirstName(), m.getLastName(), m.getStatus(), m.getCreatedAt(), m.getUpdatedAt(), clientAndAccountBalanceDtos);
+                    m.getFirstName(), m.getLastName(), m.getStatus(), m.getCreatedAt(),
+                    m.getUpdatedAt(), clientAndAccountBalanceDtos);
             managersDto.add(managerDto);
         }
         return new ArrayList<>(managersDto);

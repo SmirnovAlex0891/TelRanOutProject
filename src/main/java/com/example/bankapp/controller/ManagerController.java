@@ -14,7 +14,6 @@ import java.util.List;
 @RequestMapping("/manager")
 @RequiredArgsConstructor
 public class ManagerController {
-
     private final ManagerService managerService;
 
     @GetMapping("/all/{balance}")

@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.security.Principal;
 import java.util.Collection;
@@ -18,10 +19,11 @@ import java.util.Collection;
 @Api(value = "Controller for Agreement")
 public class AgreementController {
     private final AgreementService agreementService;
+
     @PostMapping("/getAgreements")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation("Get an account by client firstName and lastName")
-    public Collection<AgreementDto> getAgreementById(@RequestBody ClientFirstNameLastNameDto nameDto, Principal principal) {
+    public Collection<AgreementDto> getAgreementById(@RequestBody ClientFirstNameLastNameDto nameDto, @ApiIgnore Principal principal) {
         return agreementService.getAgreements(nameDto, principal);
     }
 }
